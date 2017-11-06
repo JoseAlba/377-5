@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class MissedTarget : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public TextMesh missesText;//linked through the unity interface 
+	int numberofMisses;
 
-	void OnMouseDown()
-	{
-		Debug.Log ("Missed - Add Miss!");
+	void OnMouseDown() {
+		
+		numberofMisses = System.Int32.Parse(missesText.text);
+		numberofMisses++;
+
+		missesText.text = numberofMisses.ToString();
+		Debug.Log ("Missed Target!");
+
+		if (numberofMisses >= 10) {
+			Debug.Log ("Game Over!");
+			Application.Quit ();//go back to the main menu***
+		}
 	}
 }

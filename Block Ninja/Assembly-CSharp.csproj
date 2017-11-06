@@ -51,11 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\DestroyCube.cs" />
+     <Compile Include="Assets\Scripts\DestroyCubeTrigger.cs" />
      <Compile Include="Assets\Scripts\HitTarget.cs" />
      <Compile Include="Assets\Scripts\MissedTarget.cs" />
      <Compile Include="Assets\Scripts\SpawnObject.cs" />
-     <Compile Include="Assets\Scripts\ThrowObjectLeft.cs" />
-     <Compile Include="Assets\Scripts\ThrowObjectRight.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

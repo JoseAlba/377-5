@@ -18,28 +18,22 @@ public class SpawnObject : MonoBehaviour {
 		//simple countdown in seconds, resets upon hitting zero
         countdown -= Time.deltaTime;
         
-		GetComponent<TextMesh>().text = "" + Mathf.Round(countdown);
+		GetComponent<TextMesh>().text = Mathf.Round(countdown).ToString();
 
-		if (countdown < 0)
-        {
-            countdown = spawnTime;
+		if (countdown < 0) {
+			countdown = spawnTime;//reset the timer
 
-			//create a new object that will be spawned whenever the countdown hits zero
-			//will randomly select which side the object will spawn on... left or right
-			GameObject newCube1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			newCube1.transform.position = new Vector3(-1f,3f,-14f);//spawn point right
-			newCube1.AddComponent<Rigidbody>();//Add the rigidbody
-			newCube1.GetComponent<Rigidbody>().AddForce(newCube1.transform.position + new Vector3(0,600,300));
-			newCube1.transform.Rotate(new Vector3(0,0,500));
-		
-			newCube1.AddComponent(System.Type.GetType("HitTarget"));
-
-			GameObject newCube2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			newCube2.transform.position = new Vector3(-1f,3f,14f);//spawn point left
-			newCube2.AddComponent<Rigidbody>();//Add the rigidbody
-			newCube2.GetComponent<Rigidbody>().AddForce(newCube1.transform.position + new Vector3(0,600,-300));
-			newCube2.transform.Rotate(new Vector3(0,0,500));
-			newCube2.AddComponent(System.Type.GetType("HitTarget"));
-	    }
+			createTarget (new Vector3 (-1f, 3f, -14f), new Vector3 (0, 600, 300));
+			createTarget (new Vector3(-1f,3f,14f), new Vector3(0,600,-300));          
+		}
     }
+
+	private void createTarget(Vector3 spawnLocation, Vector3 forceApplied){
+		GameObject newCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		newCube.transform.position = spawnLocation;
+		newCube.AddComponent<Rigidbody>();
+		newCube.GetComponent<Rigidbody>().AddForce(forceApplied);
+		newCube.AddComponent(System.Type.GetType("HitTarget"));//script for checking if the user hits the object
+		newCube.AddComponent(System.Type.GetType("DestroyCube"));//script for destroying object off screen
+	}
 }

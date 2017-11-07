@@ -17,6 +17,8 @@ public class HitTarget : MonoBehaviour {
 		subCube.GetComponent<Collider>().isTrigger = true;
 		subCube.tag = "ExplosionEyeCandy";
 
+		subCube.GetComponent<Renderer> ().material = Resources.Load ("DestroyObject", typeof(Material)) as Material;
+
 		subCube.transform.position = spawnLocation;
 		subCube.transform.localScale = new Vector3 (1f,1f,0.5f);//changing the size of explosion eye candy
 
